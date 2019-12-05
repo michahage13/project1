@@ -1,0 +1,34 @@
+body {
+  text-align: center;
+}
+
+#search-form {
+  text-align: center;
+  background-color: grey;
+}
+
+div {
+  padding: 10px 10px 10px 10px;
+}
+
+span {
+  padding: 0px 20px 0px 20px;
+}
+
+#ratingform {
+}
+
+#commentform {
+
+}
+
+
+
+
+
+
+
+.bookreview{
+  width: 400px;
+  height: 300px;
+}

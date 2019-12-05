@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book view
+{% endblock %}
+
+{% block main %}
+  <h1>Welcome {{ user }}</h1>
+
+    <div id="search-form" class="">
+      <form action="/" method="POST">
+        <div>
+          <select name="option" class="form-control" required>
+            <option value="isbn">ISBN number</option>
+            <option value="title">Book Title</option>
+            <option value="author">Author</option>
+            <option value="year">Publishing year</option>
+          </select>
+        </div>
+        <div>
+          <input type="text" name="value" class="form-control" placeholder="Select your search type above">
+        </div>
+        <div>
+          <input type="submit" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+    <div id="search-result">
+      <ul class="list-group">
+        {% for res in result %}
+        <a href="/book/{{ res.isbn }}">
+          <li class="list-group-item">ISBN: {{ res.isbn }}, Title: {{ res.title }} written by {{ res.author }} in {{ res.year }}</li>
+        </a>
+        {% endfor %}
+      </ul>
+    </div>
+{% endblock %}

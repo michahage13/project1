@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book view
+{% endblock %}
+
+{% block main %}
+<div class="bookdiv">
+  <h1>Overview</h1>
+<table class="table">
+  <tr>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Publishing year</th>
+  </tr>
+  <tr>
+    <td>{{ result[0].isbn }}</td>
+    <td>{{ result[0].title }}</td>
+    <td>{{ result[0].author }}</td>
+    <td>{{ result[0].year }}</td>
+  </tr>
+</table>
+</div>
+{% if not checkrev %}
+<div class="bookdiv">
+  <form method="POST" id="reviewform">
+    <div>
+      <select name="rating" class="form-control" id="ratingform" required>
+        <option value="" selected>Rate the book</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <textarea name="comment" form="reviewform" class="form-control" placeholder="Write your review"></textarea>
+    </div>
+    <div>
+      <input type="submit" class="form-control">
+    </div>
+  </form>
+</div>
+{% endif %}
+{% if allrev %}
+<div>
+  <div>
+    <h2>CS50w Books User reviews</h2>
+  </div>
+  <div>
+    <table class="table">
+      <tr>
+        <th>Reviewed by</th>
+        <th>Rating</th>
+        <th>Review</th>
+      </tr>
+      {% for r in allrev %}
+        <tr>
+          <td>{{ r.usname }}</td>
+          <td>{{ r.rating }}</td>
+          <td>{{ r.comment }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% else %}
+<div>
+  <h2>CS50w Books User reviews</h2>
+</div>
+<div>
+  <h3>No Reviews yet</h3>
+</div>
+{% endif %}
+<div>
+  <div>
+    <h2>Goodreads average score</h2>
+  </div>
+  <div>
+    <span>Average Rating: {{ goodread["books"][0]["average_rating"] }}</span>
+    <span>Ratings: {{ goodread["books"][0]["work_ratings_count"] }}</span>
+  </div>
+</div>
+{% endblock %}
+
+{% if allrev %}
+<ul>
+  {% for r in allrev %}
+    <li>Rating: {{ r.rating }} and comment: {{ r.comment }} submitted by {{ r.usname }}</li>
+  {% endfor %}
+  <div id="goodread">
+    Average Rating: {{ goodread["books"][0]["average_rating"] }}
+    Ratings: {{ goodread["books"][0]["work_ratings_count"] }}
+  </div>
+</ul>
+  {% if rev %}
+    {{ rev[0].rating }}{{ rev[0].comment }}
+  {% else %}
+    no User Rating yet
+  {% endif %}
+{% else %}
+No reviews yet
+{% endif %}
+{% if allrev %}
+{% endif %}
